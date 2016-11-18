@@ -4,16 +4,25 @@ import "math/rand"
 import "time"
 import "strings"
 
-var alphabet string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+var glyphs string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 
-func Generate(len int) string {
-    if len < 5 {
+func Generate(l int, g ...string) (string) {
+    if l < 5 {
         panic("Length must be more or equal to 5")
     }
-    
-    a := split(alphabet)
+
+    if g != nil {
+        glyphs = strings.Join(g, "")
+    }
+
+    if len(glyphs) < l {
+        panic("Length of ID cannot be longer than glyphs")
+    }
+
+    a := split(glyphs)
     s := shuffle(a)
-    return strings.Join(slice(s, len), "")
+
+    return strings.Join(slice(s, l), "")
 }
 
 func shuffle(a []string) []string {
