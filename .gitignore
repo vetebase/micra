@@ -1,2 +1,4 @@
-pkg/
-src/
+# Directories
+=============
+vendor/*
+!vendor/vendor.json
